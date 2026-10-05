@@ -1,0 +1,88 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int id;
+    string name, author;
+    Node *next;
+};
+
+Node *head = NULL;
+
+void insertBook() {
+    Node *newNode = new Node;
+
+    cout << "Enter Book ID: ";
+    cin >> newNode->id;
+    cout << "Enter Book Name: ";
+    cin >> newNode->name;
+    cout << "Enter Author Name: ";
+    cin >> newNode->author;
+
+    newNode->next = head;
+    head = newNode;
+
+    cout << "Book inserted successfully!\n";
+}
+
+void searchBook() {
+    int id;
+    cout << "Enter Book ID to search: ";
+    cin >> id;
+
+    Node *temp = head;
+
+    while (temp != NULL) {
+        if (temp->id == id) {
+            cout << "Book Found!\n";
+            cout << "ID: " << temp->id << endl;
+            cout << "Name: " << temp->name << endl;
+            cout << "Author: " << temp->author << endl;
+            return;
+        }
+        temp = temp->next;
+    }
+
+    cout << "Book not found!\n";
+}
+
+void displayBooks() {
+    Node *temp = head;
+
+    if (temp == NULL) {
+        cout << "No books available.\n";
+        return;
+    }
+
+    cout << "\nAvailable Books:\n";
+
+    while (temp != NULL) {
+        cout << "ID: " << temp->id
+             << ", Name: " << temp->name
+             << ", Author: " << temp->author << endl;
+        temp = temp->next;
+    }
+}
+
+int main() {
+    int choice;
+
+    do {
+        cout << "\n1. Insert Book";
+        cout << "\n2. Search Book";
+        cout << "\n3. Display Books";
+        cout << "\n4. Exit";
+        cout << "\nEnter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: insertBook(); break;
+            case 2: searchBook(); break;
+            case 3: displayBooks(); break;
+            case 4: cout << "Exit"; break;
+            default: cout << "Invalid choice!";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
